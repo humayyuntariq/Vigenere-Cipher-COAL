@@ -51,11 +51,13 @@
         mov ebx, 0
         movzx eax, byte ptr [esi]
         movzx ebx, byte ptr [edi]
-        ; sub eax, 65
-        ; sub ebx, 65
+        
+        sub eax, 65
+        sub ebx, 65
+
         ; encryption = (eax + ebx ) mod 26
         add eax, ebx  
-        sub eax, 130  ;in ASCII code they alphabet start at 65 so subtracting 65 & 65 for both alphabet to get them at zero indexxing
+        ;sub eax, 130  ;in ASCII code they alphabet start at 65 so subtracting 65 & 65 for both alphabet to get them at zero indexxing
 
         cmp eax, 26
         jb changee
@@ -142,6 +144,28 @@
         case_ending:
         inc esi
     loop upCase
+
+     mov esi, offset key
+        mov ecx, key_length
+
+    keyupCase:
+        mov al, [esi]
+        cmp al, 'a'
+        jae sectd
+        jmp keycase_ending 
+
+        sectd:
+        cmp al, 'z'
+        jbe keytoupppercase
+        jmp case_ending
+
+        keytoupppercase:
+        sub al, 32
+        mov [esi], al
+
+        keycase_ending:
+        inc esi
+    loop keyupCase
     ret
     uppercase ENDP
 
