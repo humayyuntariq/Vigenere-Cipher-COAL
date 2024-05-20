@@ -21,7 +21,7 @@
                 call clrscr
 
             call InputData
-            ;call uppercase
+            call uppercase
             call encode_it
 
 
@@ -47,9 +47,12 @@
     encodingg:
         push ecx ; saving ecx because we are gonna need ecx for taking mod
         ;moving the letter of message and key into register for furhter operation
+        mov eax, 0
+        mov ebx, 0
         movzx eax, byte ptr [esi]
         movzx ebx, byte ptr [edi]
-
+        ; sub eax, 65
+        ; sub ebx, 65
         ; encryption = (eax + ebx ) mod 26
         add eax, ebx  
         sub eax, 130  ;in ASCII code they alphabet start at 65 so subtracting 65 & 65 for both alphabet to get them at zero indexxing
@@ -64,22 +67,22 @@
 
         changee:
         add eax, 65
-        mov [esi], eax
+        mov [esi], al
         inc esi
-
         ;key increment
         inc edi
         inc key_count
 
         ;checking if the key is greater than the total character of key, if so then reset edi, counter to begiinging
-        mov ebx, key_count
-        mov eax, key_length
-        cmp ebx, eax
-        jg backtostart
+        mov eax, key_count
+        mov ebx, key_length
+        cmp eax, ebx
+        ja backtostart
         jmp ending_encod
 
         backtostart:
         mov edi, offset key
+        ;call DumpRegs
         mov key_count, 1
 
         ending_encod:
