@@ -51,13 +51,17 @@
         mov ebx, 0
         movzx eax, byte ptr [esi]
         movzx ebx, byte ptr [edi]
+
+        ;skippping the space in sentence
+        cmp eax, 32
+        je nextt
         
+        ;in ASCII code they alphabet start at 65 so subtracting 65 & 65 for both alphabet to get them at zero indexxing
         sub eax, 65
         sub ebx, 65
 
         ; encryption = (eax + ebx ) mod 26
         add eax, ebx  
-        ;sub eax, 130  ;in ASCII code they alphabet start at 65 so subtracting 65 & 65 for both alphabet to get them at zero indexxing
 
         cmp eax, 26
         jb changee
@@ -70,7 +74,7 @@
         changee:
         add eax, 65
         mov [esi], al
-        inc esi
+
         ;key increment
         inc edi
         inc key_count
@@ -88,6 +92,9 @@
         mov key_count, 1
 
         ending_encod:
+        
+        nextt:
+        inc esi
         pop ecx
     loop encodingg
 
@@ -128,6 +135,8 @@
 
     upCase:
         mov al, [esi]
+        cmp al, ' '
+        je case_ending
         cmp al, 'a'
         jae secondctd
         jmp case_ending 
