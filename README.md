@@ -2,7 +2,7 @@
 Resources Online: [https://www.geeksforgeeks.org/vigenere-cipher/
 ](https://www.geeksforgeeks.org/vigenere-cipher/)
 
-Website of demo: [https://studio.code.org/s/vigenere/lessons/1/levels/1](https://studio.code.org/s/vigenere/lessons/1/levels/1)
+Website of demo: [https://cryptii.com/pipes/vigenere-cipher](https://cryptii.com/pipes/vigenere-cipher)
 
 ## Notes
 Encryption
