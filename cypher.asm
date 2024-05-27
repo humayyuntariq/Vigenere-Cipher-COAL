@@ -100,7 +100,9 @@
             ja backtostart
             jmp ending_encod
 
-            backtostart:
+            backtostart: mov esi, offset bu  ;the address to be decoded
+    mov edi, offset key ; the key address 
+
             mov edi, offset key
             ;call DumpRegs
             mov key_count, 1
@@ -216,9 +218,8 @@
             sub eax, 65
             sub ebx, 65
 
-            ; encryption = (eax + ebx ) mod 26
+            ; decryption = (eax + ebx ) mod 26
             sub eax, ebx  
-
             cmp eax, 26
             jb changee_dec
             

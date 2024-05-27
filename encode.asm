@@ -15,7 +15,7 @@
     mov esi, offset bu  ;the address to be decoded
     mov edi, offset key ; the key address 
 
-   movzx ebx, byte ptr [edi] ; moving the  byte 8 bit to 32 bit register
+    movzx ebx, byte ptr [edi] ; moving the  byte 8 bit to 32 bit register
     sub   ebx, 65             ; ASCII code For alphabets starts form the 65
     movzx eax, byte ptr [esi]
     sub   eax, 65
