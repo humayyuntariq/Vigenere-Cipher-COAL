@@ -23,17 +23,23 @@
                 call crlf
                 call clrscr
 
-            ; call InputData
-            ; call uppercase
-            ; call encode_it
+            call InputData
+            call uppercase
+            call encode_it
 
 
-            ; ;printing the result
-            ; mov edx, offset result
-            ; call writestring
-            ; mov edx, offset plain_encod_msg
-            ; call writestring
-            ; call crlf
+            ;printing the result
+            mov edx, offset result
+            call writestring
+            mov edx, offset plain_encod_msg
+            call writestring
+            call crlf
+
+            mov plain_encod_length , 0
+            mov key_length, 0
+            mov key_count, 1
+            mov plain_encod_msg , 0
+            mov key , 0
 
             call InputData
             call uppercase
