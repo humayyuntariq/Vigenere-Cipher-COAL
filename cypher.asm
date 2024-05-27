@@ -14,6 +14,8 @@
             key_count dword 1
 
             result byte "Message: ", 0
+
+            val DWORD 0
             
     .code
     main PROC
@@ -21,17 +23,17 @@
                 call crlf
                 call clrscr
 
-            call InputData
-            call uppercase
-            call encode_it
+            ; call InputData
+            ; call uppercase
+            ; call encode_it
 
 
-            ;printing the result
-            mov edx, offset result
-            call writestring
-            mov edx, offset plain_encod_msg
-            call writestring
-            call crlf
+            ; ;printing the result
+            ; mov edx, offset result
+            ; call writestring
+            ; mov edx, offset plain_encod_msg
+            ; call writestring
+            ; call crlf
 
             call InputData
             call uppercase
@@ -100,8 +102,7 @@
             ja backtostart
             jmp ending_encod
 
-            backtostart: mov esi, offset bu  ;the address to be decoded
-    mov edi, offset key ; the key address 
+            backtostart: 
 
             mov edi, offset key
             ;call DumpRegs
@@ -218,11 +219,19 @@
             sub eax, 65
             sub ebx, 65
 
-            ; decryption = (eax + ebx ) mod 26
+            ; decryption = (eax - ebx ) mod 26
             sub eax, ebx  
+            cmp eax , 0
+            jl changesign
+            jnl no_changesign
+            changesign:
+                add eax, 26
+                jmp no_changesign
+            no_changesign:
             cmp eax, 26
-            jb changee_dec
-            
+            jl changee_dec
+
+            call writeInt
             mov edx, 0
             mov ecx, 26
             div ecx
@@ -245,11 +254,8 @@
 
             backtostart_dec:
             mov edi, offset key
-            ;call DumpRegs
             mov key_count, 1
-
             ending_encod_dec:
-            
             nextt_dec:
             inc esi
             pop ecx
